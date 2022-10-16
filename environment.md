@@ -61,8 +61,11 @@
 
 1. python node
 2. redis、mysql、postgre、mongodb、elasticsearch、clickhouse
-3. git、
-4. ssh-server
-5. docker、portainer.io
-6. jenkins
-7. vmware vsphere
+3. kafka、rabbitMQ
+4. git、
+5. nginx、gunicorn、uWSGI
+6. ssh-server
+7. docker、portainer.io
+8. supervisor、pm2
+9. jenkins
+10. vmware vsphere
