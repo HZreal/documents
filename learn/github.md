@@ -19,14 +19,14 @@ https://docs.github.com/cn/search-github/searching-on-github/searching-for-repos
 文档https://docs.github.com/cn/search-github
 
 1. in操作进行位置搜索
-   1. in name 在标题中搜
-      1. 如 golang in name，表示标题中含有golang的
-      2. 如python in name
-   2. in description
-   3. in readme
+   1. in:name 在标题中搜
+      1. 如 golang in:name，表示标题中含有golang的
+      2. 如python in:name
+   2. in:description
+   3. in:readme
    4. 组合使用：
       1. 逗号分开每个位置
-      2. 如 vue in name,description
+      2. 如 vue in:name,description
 2. stars、fork
    1. stars:>=2000
    2. fork:<5000
