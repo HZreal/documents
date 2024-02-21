@@ -7,7 +7,7 @@ https://www.postgresqltutorial.com/postgresql-getting-started/install-postgresql
 指定版本安装  
 
 ```bash
-sudo apt-get install postgresql-12
+sudo apt-get install postgresql-13
 ```
 
 ## 配置
@@ -189,6 +189,22 @@ func有多种：
 
 2. --
 3.  --
+
+
+
+### pg_dump工具
+
+```
+# 数据库备份
+pg_dump -h localhost -U postgres <db_name> > ./dump_out.sql
+```
+
+### psql工具
+
+```
+导入sql数据源
+psql "host=localhost port=5432 user=postgres password=<password> dbname=<db_name>" -f ./dump_out.sql
+```
 
 
 
