@@ -1,0 +1,128 @@
+# Go 依赖注入之 wire 库
+
+## 简介
+
+wire 库是管理和解析依赖关系的。
+
+随着项目规模的增长，手动管理依赖关系变得越来越困难，容易导致代码的复杂性和耦合度增加。为了解决这一问题，Google 开发了一个名为 wire 的依赖注入工具，它可以自动生成依赖注入代码，帮助开发者管理依赖关系，提高代码的清晰度和可维护性。
+
+GitHub 地址：https://github.com/google/wire
+
+## 安装命令
+
+```bash
+go get github.com/google/wire/cmd/wire
+```
+
+
+
+## 使用示例
+
+以常见的 controller、service、model 模式为例，示例如下:
+
+代码片段
+
+user.go
+
+```go
+package main
+
+import (
+    "database/sql"
+    "net/http"
+)
+
+// User 是用户模型
+type User struct {
+    ID    int
+    Name  string
+    Email string
+}
+
+// UserRepository 是用户存储库
+type UserRepository struct {
+    DB *Database
+}
+
+// UserService 是用户服务
+type UserService struct {
+    Repo *UserRepository
+}
+
+// UserController 是用户控制器
+type UserController struct {
+    Service *UserService
+}
+
+// GetUserByID 处理获取用户的HTTP请求
+func (controller *UserController) GetUserByID(w http.ResponseWriter, r *http.Request) {
+    id := 1 // 假设我们从请求中获取了用户ID
+    user, err := controller.Service.GetUserByID(id)
+    if err != nil {
+        http.Error(w, err.Error(), http.StatusInternalServerError)
+        return
+    }
+    // 返回用户信息
+}
+
+// NewUserRepository 创建一个新的用户存储库
+func NewUserRepository(db *Database) *UserRepository {
+    return &UserRepository{DB: db}
+}
+
+// NewUserService 创建一个新的用户服务
+func NewUserService(repo *UserRepository) *UserService {
+    return &UserService{Repo: repo}
+}
+
+// NewUserController 创建一个新的用户控制器
+func NewUserController(service *UserService) *UserController {
+    return &UserController{Service: service}
+}
+
+```
+
+wire.go
+```go
+//+build wireinject
+
+package main
+
+import (
+    "github.com/google/wire"
+)
+
+// InitializeUserController 初始化用户控制器
+func InitializeUserController() (*UserController, error) {
+    wire.Build(NewUserController, NewUserService, NewUserRepository, NewDatabase)
+    return nil, nil
+}
+
+```
+
+main.go
+
+```go
+package main
+
+import (
+    "log"
+    "net/http"
+)
+
+func main() {
+    controller, err := InitializeUserController()
+    if err != nil {
+        log.Fatalf("failed to initialize user controller: %v", err)
+    }
+
+    http.HandleFunc("/user", controller.GetUserByID)
+    log.Println("Starting server on :8080")
+    if err := http.ListenAndServe(":8080", nil); err != nil {
+        log.Fatalf("failed to start server: %v", err)
+    }
+}
+
+```
+
+执行
