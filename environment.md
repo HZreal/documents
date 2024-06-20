@@ -24,7 +24,7 @@
 
 1. 谷歌浏览器
 2. VMware
-3. clash for windows、V2rayN 
+3. chatGPT
 4. postman、apifox、easydoc
 5. GripData、navicate、RedisInsight、mongosh、compass、pgAdmin、neo4j Desktop
 6. 百度网盘、阿里云盘
