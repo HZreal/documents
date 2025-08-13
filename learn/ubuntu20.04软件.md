@@ -7,29 +7,29 @@
 #### 1、卸载可能存在的或者为安装成功的Docker版本
 
 ```
-sudo apt-``get` `remove docker docker-engine docker-ce docker.io
+sudo apt-get remove docker docker-engine docker-ce docker.io
 ```
 
 #### 2、添加阿里云的GPG密钥
 
 ```
-curl -fsSL http:``//mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
+curl -fsSL http://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
 ```
 
 #### 3、使用以下命令设置存储库
 
 ```
-sudo add-apt-repository ``"deb [arch=amd64] http://mirrors.aliyun.com/docker-ce/linux/ubuntu $(lsb_release -cs) stable"
+sudo add-apt-repository "deb [arch=amd64] http://mirrors.aliyun.com/docker-ce/linux/ubuntu $(lsb_release -cs) stable"
 ```
 
 #### 4、安装最新版本的Docker
 
 ```
-sudo apt-``get` `update
+sudo apt-get update
 ```
 
 ```
-sudo apt-``get` `install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 ```
 
 #### 5、验证Docker是否安装成功
@@ -268,4 +268,5 @@ sudo systemctl restart smbd.service
 
 
 windows访问：win+R输入：\\\ip     然后回车输入用户名密码
+
 
